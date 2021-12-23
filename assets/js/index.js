@@ -121,7 +121,6 @@ const obtenerDatos = async () => {
         const objAnimal = crearObjAnimal(animal);
         arregloAnimales.push(objAnimal);
         generarCard(arregloAnimales);
-        addEventCard();
     });
 })();
 
@@ -144,30 +143,30 @@ const generarCard = (arregloAnimales) => {
         div.innerHTML = cardString;
         divAnimales.appendChild(div);
 
-        document.getElementById(`btn-sound-${index}`).addEventListener('click', () => {
-            switch (element.nombre) {
-                case LABEL_AGUILA:
-                    element.chillar();
-                    break;
-                case LABEL_LEON:
-                    element.rugir();
-                    break;
-                case LABEL_LOBO:
-                    element.aullar();
-                    break;
-                case LABEL_OSO:
-                    element.gruñir();
-                    break;
-                case LABEL_SERPIENTE:
-                    element.sisear();
-                    break;
-            }
-        })
+        addEventSoundCard(element, index);
+        addEventOpenModal(element, index);
     });
 };
 
-const addEventCard = (_) => {
-    const cards = document.getElementsByClassName('div .card');
-    console.log(cards);
+const addEventSoundCard = (element, index) => {
+    document.getElementById(`btn-sound-${index}`).addEventListener('click', () => {
+        switch (element.nombre) {
+            case LABEL_AGUILA:
+                element.chillar();
+                break;
+            case LABEL_LEON:
+                element.rugir();
+                break;
+            case LABEL_LOBO:
+                element.aullar();
+                break;
+            case LABEL_OSO:
+                element.gruñir();
+                break;
+            case LABEL_SERPIENTE:
+                element.sisear();
+                break;
+        }
+    })
 };
 
