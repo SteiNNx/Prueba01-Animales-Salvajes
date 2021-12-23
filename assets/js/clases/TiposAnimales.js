@@ -14,7 +14,7 @@ export class Leon extends Animal {
      * @returns void
      */
     rugir() {
-        setReproducirSonido(this.sonido());
+        setReproducirSonido.responseReproducirSonido(this.getSonido());
     }
 
 }
@@ -32,7 +32,7 @@ export class Lobo extends Animal {
      * @returns void
      */
     aullar() {
-        setReproducirSonido(this.sonido());
+        setReproducirSonido.responseReproducirSonido(this.getSonido());
     }
 
 }
@@ -49,7 +49,7 @@ export class Oso extends Animal {
      * @returns void
      */
     gruñir() {
-        setReproducirSonido(this.sonido());
+        setReproducirSonido.responseReproducirSonido(this.getSonido());
     }
 
 }
@@ -66,7 +66,7 @@ export class Serpiente extends Animal {
      * @returns void
      */
     sisear() {
-        setReproducirSonido(this.sonido());
+        setReproducirSonido.responseReproducirSonido(this.getSonido());
     }
 
 }
@@ -83,7 +83,7 @@ export class Aguila extends Animal {
      * @returns void
      */
     chillar() {
-        setReproducirSonido(this.sonido());
+        setReproducirSonido.responseReproducirSonido(this.getSonido());
     }
 
 }
