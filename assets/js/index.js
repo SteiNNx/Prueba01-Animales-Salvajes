@@ -188,9 +188,15 @@ const addContentDataInModal = (element, index) => {
             /** Creo un elemento div */
             const div = document.createElement("div");
             /** Declaro el contenido en un string */
+
             const info = `
-            <img></img>
-            <p>${element.getNombre()}</p>
+            <img src="${element.getImg()}" class="img-thumbnail">
+            <div class="text-center text-white pt-3">
+                <p>${element.getEdad()}</p>
+                <p>Comentarios</p>
+                <hr>
+                <p>${element.getComentarios()}</p>
+            </div>
             `;
 
             /** inserto el string en el div creado */
