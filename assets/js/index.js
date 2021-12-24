@@ -35,6 +35,12 @@ const validarFormulario = () => {
     return true;
 };
 
+const limpiarFormulario = () => {
+    document.getElementById("animal").value = "";
+    document.getElementById("edad").value = "";
+    document.getElementById("comentarios").value = "";
+}
+
 const crearObjAnimal = (valueAnimal) => {
     let animal = document.getElementById("animal").value;
     let edad = document.getElementById("edad").value;
@@ -126,6 +132,7 @@ const obtenerDatos = async () => {
             // Crear instancia
             const objAnimal = crearObjAnimal(animal);
             arregloAnimales.push(objAnimal);
+            limpiarFormulario();
         }
         generarCard(arregloAnimales);
     });
@@ -140,9 +147,9 @@ const generarCard = (arregloAnimales) => {
         cardString = `
         <div id="div-animal-${index}" class="card">
             <img id="img-animal-${index}" src="${element.img}" class="card-img-top" data-toggle="modal" data-target="#exampleModal">
-                <div class="card-body">
-                    <a id="btn-sound-${index}" href="#" class="btn btn-primary d-flex">${element.nombre}</a>
-                </div>
+            <a id="btn-sound-${index}" href="#" class="btn btn-secondary d-flex justify-content-center">
+                <i class="fas fa-volume-up fa-2x"></i>
+            </a>
         </div>`;
 
         const div = document.createElement("div");
@@ -177,7 +184,6 @@ const addEventSoundCard = (element, index) => {
 };
 
 const addContentDataInModal = (element, index) => {
-
     document.getElementById(`img-animal-${index}`)
         .addEventListener('click', () => {
             /** Recuro div contenedor del modal */
@@ -206,4 +212,3 @@ const addContentDataInModal = (element, index) => {
             divCardContent.appendChild(div);
         });
 }
-
