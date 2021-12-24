@@ -16,6 +16,10 @@ import {
     SOUND_URL,
 } from './utils.js';
 
+/**
+ * 
+ * @returns {boolean} isValid
+ */
 const validarFormulario = () => {
     let animal = document.getElementById("animal").value;
     let edad = document.getElementById("edad").value;
@@ -26,8 +30,9 @@ const validarFormulario = () => {
         comentarios === ""
     ) {
         alert("Rellenar todos los campos");
-        return;
+        return false;
     }
+    return true;
 };
 
 const crearObjAnimal = (valueAnimal) => {
@@ -115,11 +120,13 @@ const obtenerDatos = async () => {
     /** Agregar */
     document.getElementById("btnRegistrar").addEventListener("click", () => {
         // Validamos
-        validarFormulario();
+        const isValidate = validarFormulario();
 
-        // Crear instancia
-        const objAnimal = crearObjAnimal(animal);
-        arregloAnimales.push(objAnimal);
+        if (isValidate) {
+            // Crear instancia
+            const objAnimal = crearObjAnimal(animal);
+            arregloAnimales.push(objAnimal);
+        }
         generarCard(arregloAnimales);
     });
 })();
@@ -131,20 +138,19 @@ const generarCard = (arregloAnimales) => {
     let cardString = "";
     arregloAnimales.forEach((element, index) => {
         cardString = `
-      <div id="div-animal-${index}" class="card">
-    <img src="${element.img}" class="card-img-top" alt="...">
-    <div class="card-body">
-       <a id="btn-sound-${index}" href="#" class="btn btn-primary d-flex">${element.nombre}</a>
-    </div>
-  </div>
-      `;
+        <div id="div-animal-${index}" class="card">
+            <img id="img-animal-${index}" src="${element.img}" class="card-img-top" data-toggle="modal" data-target="#exampleModal">
+                <div class="card-body">
+                    <a id="btn-sound-${index}" href="#" class="btn btn-primary d-flex">${element.nombre}</a>
+                </div>
+        </div>`;
 
         const div = document.createElement("div");
         div.innerHTML = cardString;
         divAnimales.appendChild(div);
 
         addEventSoundCard(element, index);
-        addEventOpenModal(element, index);
+        addContentDataInModal(element, index);
     });
 };
 
@@ -169,4 +175,29 @@ const addEventSoundCard = (element, index) => {
         }
     })
 };
+
+const addContentDataInModal = (element, index) => {
+
+    document.getElementById(`img-animal-${index}`)
+        .addEventListener('click', () => {
+            /** Recuro div contenedor del modal */
+            const divCardContent = document.getElementById('modal-content');
+            /** limpio el contenido del contenedor */
+            divCardContent.innerHTML = '';
+
+            /** Creo un elemento div */
+            const div = document.createElement("div");
+            /** Declaro el contenido en un string */
+            const info = `
+            <img></img>
+            <p>${element.getNombre()}</p>
+            `;
+
+            /** inserto el string en el div creado */
+            div.innerHTML = info;
+
+            /** agrego el elemento div creado como nodo hijo al elemento contenedor padre */
+            divCardContent.appendChild(div);
+        });
+}
 
